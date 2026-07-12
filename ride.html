@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <!-- HEADER NAVIGATION -->
   <header>
     <div class="navbar">
@@ -29,7 +28,6 @@
       </div>
     </div>
   </header>
-
   <!-- SOS EMERGENCY OVERLAY ALARM -->
   <div class="sos-overlay" id="sosOverlay">
     <div class="sos-modal">
@@ -44,7 +42,6 @@
       </div>
     </div>
   </div>
-
   <main class="container">
     <div class="ride-dashboard">
       
@@ -66,7 +63,6 @@
               <span style="color: var(--color-accent); font-size: 0.85rem;">Secure Encrypted Connection</span>
             </div>
           </div>
-
           <!-- SVG Simulated Grid Map -->
           <svg class="map-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="background-color: #0b0717;">
             <!-- Grid Lines representing city blocks -->
@@ -90,26 +86,22 @@
             <rect x="60" y="360" width="340" height="90" rx="8" fill="rgba(255,255,255,0.02)" />
             <rect x="440" y="360" width="100" height="90" rx="8" fill="rgba(255,255,255,0.02)" />
             <rect x="580" y="360" width="160" height="90" rx="8" fill="rgba(255,255,255,0.02)" />
-
             <!-- City Roads/Routes -->
             <!-- Main Winding Route path that the car pin will follow -->
             <path id="routePath" d="M 120,400 L 120,280 L 340,280 L 340,140 L 680,140" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M 120,400 L 120,280 L 340,280 L 340,140 L 680,140" fill="none" stroke="rgba(76, 201, 240, 0.25)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-
             <!-- Pickup Flag SVG -->
             <g transform="translate(120, 400)">
               <circle cx="0" cy="0" r="10" fill="var(--color-primary-glow)" />
               <circle cx="0" cy="0" r="4" fill="var(--color-primary)" />
               <text x="15" y="4" fill="var(--color-text-muted)" font-size="11" font-weight="700" font-family="var(--font-header)">Start Location</text>
             </g>
-
             <!-- Destination Flag SVG -->
             <g transform="translate(680, 140)">
               <circle cx="0" cy="0" r="16" fill="rgba(247, 37, 133, 0.2)" class="car-pin" />
               <circle cx="0" cy="0" r="6" fill="var(--color-secondary)" />
               <text x="-70" y="-12" fill="var(--color-secondary)" font-size="11" font-weight="800" font-family="var(--font-header)">Destination</text>
             </g>
-
             <!-- Pulsing Car Marker dot -->
             <g id="carMarker" transform="translate(120, 400)" style="visibility: hidden;">
               <circle cx="0" cy="0" r="12" fill="rgba(247, 37, 133, 0.4)" class="car-pin" />
@@ -117,7 +109,6 @@
               <circle cx="0" cy="0" r="6" fill="var(--color-secondary)" />
             </g>
           </svg>
-
           <!-- Bottom HUD overlay on Map -->
           <div style="position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem; background: rgba(9, 5, 20, 0.85); backdrop-filter: blur(8px); border: var(--border-glass); border-radius: 12px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
             <div id="driverDetails" style="display: flex; align-items: center; gap: 1rem; opacity: 0.5;">
@@ -135,7 +126,6 @@
             </div>
           </div>
         </div>
-
         <!-- Safety Details Panel -->
         <div class="card grid-2" style="padding: 1.5rem;">
           <div style="display: flex; gap: 1rem; align-items: center;">
@@ -158,7 +148,6 @@
           </div>
         </div>
       </div>
-
       <!-- RIGHT COLUMN: CONTROLS & SMART BUDDY CHAT -->
       <div class="control-panel">
         
@@ -191,20 +180,18 @@
             <div style="background: rgba(255,255,255,0.03); border: var(--border-glass); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
               <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
                 <span>Subtotal Fare:</span>
-                <span id="subtotalFare">$14.50</span>
+                <span id="subtotalFare">₹250</span>
               </div>
               <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--color-accent); font-weight: bold;">
                 <span>Safety Levy Cover:</span>
-                <span>Included ($0.00)</span>
+                <span>Included (₹0)</span>
               </div>
             </div>
-
             <button type="submit" class="btn btn-primary" id="confirmBookingBtn" style="width: 100%;">
               Search Verified Driver
             </button>
           </form>
         </div>
-
         <!-- Active Ride Overview (Visible when ride starts) -->
         <div class="card" id="activeRidePanel" style="display: none;">
           <h3 style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
@@ -220,7 +207,6 @@
             <button class="btn btn-secondary" id="terminateRideBtn" style="width: 100%;">Cancel / End Ride</button>
           </div>
         </div>
-
         <!-- Smart Buddy Companion Chat -->
         <div class="card buddy-card" style="flex-grow: 1;">
           <h3 style="display: flex; align-items: center; gap: 0.5rem;">
@@ -244,12 +230,9 @@
             </button>
           </form>
         </div>
-
       </div>
-
     </div>
   </main>
-
   <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
@@ -283,7 +266,6 @@
       <div>Designed for Resume & Portfolio Presentation</div>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
