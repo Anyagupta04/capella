@@ -1,15 +1,12 @@
 /* ==========================================================================
    CAPELLA INTERACTIVE PROTOTYPE SCRIPT
    ========================================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
   // Global URL parameter helper
   const urlParams = new URLSearchParams(window.location.search);
   const actionParam = urlParams.get('action');
-
   // Highlight active nav link based on current page
   highlightActiveNav();
-
   /* ==========================================================================
      PAGE-SPECIFIC INITIALIZATION
      ========================================================================== */
@@ -18,19 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('rideBookingForm') || document.getElementById('chatForm')) {
     initRideSimulation(actionParam);
   }
-
   // 2. Driver Hub (drivers.html)
   if (document.getElementById('hoursSlider')) {
     initDriverCalculator();
     initDriverSignupForm();
   }
-
   // 3. Business Model (business.html)
   if (document.getElementById('bar1')) {
     initBusinessChart();
   }
 });
-
 /* ==========================================================================
    NAVBAR HIGHLIGHTER
    ========================================================================== */
@@ -49,7 +43,6 @@ function highlightActiveNav() {
     }
   });
 }
-
 /* ==========================================================================
    RIDE / PASSENGER DASHBOARD SIMULATION (ride.html)
    ========================================================================== */
@@ -84,7 +77,6 @@ function initRideSimulation(actionParam) {
   const cancelSosBtn = document.getElementById('cancelSosBtn');
   const sosOverlay = document.getElementById('sosOverlay');
   const sosCountdownText = document.getElementById('sosCountdown');
-
   // Simulation variables
   let routeAnimationId = null;
   let sosTimerId = null;
@@ -99,16 +91,14 @@ function initRideSimulation(actionParam) {
     "I see you are getting closer to downtown. We'll verify your checkout code as soon as you stop!"
   ];
   let replyIndex = 0;
-
   // 1. Destination fare update listener
   destinationSelect.addEventListener('change', () => {
     if (destinationSelect.value === '680') {
-      subtotalFareText.textContent = '$14.50';
+      subtotalFareText.textContent = '₹250';
     } else {
-      subtotalFareText.textContent = '$8.20';
+      subtotalFareText.textContent = '₹130';
     }
   });
-
   // 2. Handle Ride Booking Request
   rideBookingForm.addEventListener('submit', () => {
     confirmBookingBtn.disabled = true;
@@ -117,7 +107,6 @@ function initRideSimulation(actionParam) {
     rideStatusText.textContent = 'Matching Driver...';
     rideStatusDot.style.background = 'var(--color-warning)';
     rideStatusDot.style.boxShadow = '0 0 8px var(--color-warning)';
-
     // Mock network delay to find a verified driver
     setTimeout(() => {
       bookingPanel.style.display = 'none';
@@ -130,11 +119,9 @@ function initRideSimulation(actionParam) {
       rideStatusDot.style.background = 'var(--color-success)';
       rideStatusDot.style.boxShadow = '0 0 8px var(--color-success)';
       etaText.textContent = '3 mins';
-
       // Initialize car position at start of route (0%)
       carMarker.style.visibility = 'visible';
       moveCarOnRoute(0);
-
       // Transition to active ride trip after 3 seconds
       setTimeout(() => {
         if (activeRideState === 'enroute') {
@@ -149,15 +136,12 @@ function initRideSimulation(actionParam) {
           addChatMessage('Evelyn (Smart Buddy)', 'Sarah has picked you up. I have initiated live Route Guard tracking. How are you feeling?', 'msg-received');
         }
       }, 3000);
-
     }, 2000);
   });
-
   // 3. Terminate/Cancel Ride
   terminateRideBtn.addEventListener('click', () => {
     cancelRideSimulation();
   });
-
   function cancelRideSimulation() {
     activeRideState = 'idle';
     if (routeAnimationId) {
@@ -180,7 +164,6 @@ function initRideSimulation(actionParam) {
     
     addChatMessage('System Notification', 'Ride booking was cancelled and connection reset.', 'msg-received');
   }
-
   // 4. SVG Car Movement Logic
   function moveCarOnRoute(percentage) {
     const totalLength = routePath.getTotalLength();
@@ -189,7 +172,6 @@ function initRideSimulation(actionParam) {
     
     carMarker.setAttribute('transform', `translate(${point.x}, ${point.y})`);
   }
-
   function animateCarPath(duration) {
     const startTime = performance.now();
     
@@ -201,7 +183,6 @@ function initRideSimulation(actionParam) {
       const percentage = progress * 100;
       
       moveCarOnRoute(percentage);
-
       // Decrement ETA based on progress
       const remainingMinutes = Math.max(1, Math.ceil(9 * (1 - progress)));
       etaText.textContent = `${remainingMinutes} mins`;
@@ -219,7 +200,6 @@ function initRideSimulation(actionParam) {
     
     routeAnimationId = requestAnimationFrame(update);
   }
-
   // 5. SOS Alert Systems
   const triggerSos = () => {
     sosOverlay.style.display = 'flex';
@@ -228,9 +208,7 @@ function initRideSimulation(actionParam) {
     
     // Clear any previous timer
     if (sosTimerId) clearInterval(sosTimerId);
-
     addChatMessage('System Warning', 'EMERGENCY SOS SYSTEM ARMED. Audio stream broadcast active.', 'msg-sent');
-
     sosTimerId = setInterval(() => {
       count--;
       sosCountdownText.textContent = count;
@@ -245,10 +223,8 @@ function initRideSimulation(actionParam) {
       }
     }, 1000);
   };
-
   if (triggerSosBtn) triggerSosBtn.addEventListener('click', triggerSos);
   if (navSosBtn) navSosBtn.addEventListener('click', triggerSos);
-
   cancelSosBtn.addEventListener('click', () => {
     if (sosTimerId) {
       clearInterval(sosTimerId);
@@ -259,7 +235,6 @@ function initRideSimulation(actionParam) {
     sosCountdownText.style.color = 'var(--color-text-white)';
     addChatMessage('System', 'SOS signal aborted. Central security logged standby code.', 'msg-received');
   });
-
   // 6. Companion Smart Buddy Chat Box Interaction
   chatForm.addEventListener('submit', () => {
     const text = chatInput.value.trim();
@@ -284,7 +259,6 @@ function initRideSimulation(actionParam) {
       addChatMessage('Evelyn (Smart Buddy)', replyText, 'msg-received');
     }, 1200);
   });
-
   function addChatMessage(sender, text, className) {
     const msg = document.createElement('div');
     msg.className = `chat-msg ${className}`;
@@ -292,7 +266,6 @@ function initRideSimulation(actionParam) {
     chatBox.appendChild(msg);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
-
   // 7. Auto trigger action simulation based on URL queries
   if (actionParam === 'sos') {
     setTimeout(triggerSos, 500);
@@ -303,7 +276,6 @@ function initRideSimulation(actionParam) {
     }, 500);
   }
 }
-
 /* ==========================================================================
    DRIVER REVENUE CALCULATOR & REGISTRATION (drivers.html)
    ========================================================================== */
@@ -311,52 +283,42 @@ function initDriverCalculator() {
   const hoursSlider = document.getElementById('hoursSlider');
   const ridesSlider = document.getElementById('ridesSlider');
   const fareSlider = document.getElementById('fareSlider');
-
   const hoursVal = document.getElementById('hoursVal');
   const ridesVal = document.getElementById('ridesVal');
   const fareVal = document.getElementById('fareVal');
-
   const weeklyEarningText = document.getElementById('weeklyEarning');
   const monthlyEarningText = document.getElementById('monthlyEarning');
   const annualEarningText = document.getElementById('annualEarning');
-
   function calculateEarnings() {
     const hours = parseInt(hoursSlider.value);
     
     // rides slider value ranges from 10 to 30, meaning 1.0 to 3.0
     const ridesPerHour = parseFloat(ridesSlider.value) / 10;
     const averageFare = parseInt(fareSlider.value);
-
     // Dynamic Labels
     hoursVal.textContent = `${hours} hrs`;
     ridesVal.textContent = `${ridesPerHour.toFixed(1)} rides`;
-    fareVal.textContent = `$${averageFare}`;
-
+    fareVal.textContent = `₹${averageFare}`;
     // Calculation: gross = hours * rides * fare, capella fee is 10%, payout is 90%
     const weeklyGross = hours * ridesPerHour * averageFare;
     const weeklyNet = weeklyGross * 0.9;
     const monthlyNet = weeklyNet * 4.33;
     const annualNet = weeklyNet * 52;
-
     // Update displays formatted to currency
-    weeklyEarningText.textContent = `$${weeklyNet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    monthlyEarningText.textContent = `$${monthlyNet.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    annualEarningText.textContent = `$${annualNet.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    weeklyEarningText.textContent = `₹${weeklyNet.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    monthlyEarningText.textContent = `₹${monthlyNet.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    annualEarningText.textContent = `₹${annualNet.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
   }
-
   // Bind input change listeners
   hoursSlider.addEventListener('input', calculateEarnings);
   ridesSlider.addEventListener('input', calculateEarnings);
   fareSlider.addEventListener('input', calculateEarnings);
-
   // Initialize
   calculateEarnings();
 }
-
 function initDriverSignupForm() {
   const form = document.getElementById('driverSignupForm');
   const submitBtn = document.getElementById('submitApplicationBtn');
-
   form.addEventListener('submit', () => {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting Credentials...';
@@ -376,7 +338,6 @@ function initDriverSignupForm() {
         </div>
       `;
       document.body.appendChild(modal);
-
       document.getElementById('closeDriverModalBtn').addEventListener('click', () => {
         document.body.removeChild(modal);
         form.reset();
@@ -386,7 +347,6 @@ function initDriverSignupForm() {
     }, 1500);
   });
 }
-
 /* ==========================================================================
    BUSINESS MODEL & STRATEGY ANIMATIONS (business.html)
    ========================================================================== */
@@ -398,7 +358,6 @@ function initBusinessChart() {
     { el: document.getElementById('bar4'), h: '85%' },
     { el: document.getElementById('bar5'), h: '100%' }
   ];
-
   // Animate heights on load with a sequential delay
   bars.forEach((bar, index) => {
     setTimeout(() => {
@@ -408,3 +367,4 @@ function initBusinessChart() {
     }, index * 200);
   });
 }
+
