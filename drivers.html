@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <!-- HEADER NAVIGATION -->
   <header>
     <div class="navbar">
@@ -29,7 +28,6 @@
       </div>
     </div>
   </header>
-
   <main>
     <!-- HERO SECTION -->
     <section class="container" style="padding-top: 3rem; padding-bottom: 2rem;">
@@ -41,7 +39,6 @@
         Capella offers women drivers flexible, self-determined earning potential inside a supportive and protected ecosystem. Keep 90% of your earnings, work when you want, and drive only verified female passengers.
       </p>
     </section>
-
     <!-- CALCULATOR SECTION -->
     <section class="container" style="padding-top: 0;">
       <div class="card" style="padding: 3rem;">
@@ -58,7 +55,6 @@
               </div>
               <input type="range" id="hoursSlider" class="range-slider" min="5" max="60" value="30">
             </div>
-
             <!-- Average Rides Per Hour Slider -->
             <div class="slider-group">
               <div class="slider-header">
@@ -67,40 +63,37 @@
               </div>
               <input type="range" id="ridesSlider" class="range-slider" min="10" max="30" value="15" step="1"> <!-- represents 1.0 to 3.0 -->
             </div>
-
             <!-- Average Fare Price Slider -->
             <div class="slider-group">
               <div class="slider-header">
                 <label for="fareSlider" style="font-weight: 600;">Average Ride Fare</label>
-                <span class="slider-val" id="fareVal">$18</span>
+                <span class="slider-val" id="fareVal">₹150</span>
               </div>
-              <input type="range" id="fareSlider" class="range-slider" min="10" max="40" value="18">
+              <input type="range" id="fareSlider" class="range-slider" min="50" max="500" value="150" step="10">
             </div>
           </div>
-
           <!-- Display Results Column -->
           <div style="display: flex; flex-direction: column; gap: 1.5rem;">
             <div class="calc-result">
               <h4>Estimated Weekly Income</h4>
-              <div class="calc-earning" id="weeklyEarning">$729.00</div>
+              <div class="calc-earning" id="weeklyEarning">₹6,075.00</div>
               <p class="calc-subtext">Based on 90% revenue payout split guarantee.</p>
             </div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
               <div style="background: rgba(255,255,255,0.02); border: var(--border-glass); padding: 1.25rem; border-radius: 12px; text-align: center;">
                 <div style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Monthly Income</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-accent); font-family: var(--font-header); margin-top: 0.25rem;" id="monthlyEarning">$3,156.57</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-accent); font-family: var(--font-header); margin-top: 0.25rem;" id="monthlyEarning">₹26,304.75</div>
               </div>
               <div style="background: rgba(255,255,255,0.02); border: var(--border-glass); padding: 1.25rem; border-radius: 12px; text-align: center;">
                 <div style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Annual Income</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-accent); font-family: var(--font-header); margin-top: 0.25rem;" id="annualEarning">$37,908.00</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--color-accent); font-family: var(--font-header); margin-top: 0.25rem;" id="annualEarning">₹3,15,900</div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <!-- DRIVER BENEFITS SECTION -->
     <section class="container">
       <div class="section-title">
@@ -108,7 +101,6 @@
         <h2>Why Women Choose to Drive with Capella</h2>
         <p>We build features specifically tailored to protect and enrich the lives of our female driving network.</p>
       </div>
-
       <div class="grid-3">
         <!-- Safety Verified Passengers -->
         <div class="card">
@@ -120,7 +112,6 @@
           <h3 style="margin-bottom: 0.75rem; font-size: 1.25rem;">Verified Passenger Base</h3>
           <p style="font-size: 0.9rem;">To ensure security, passengers must verify their identities using government-issued IDs before booking a ride. Drivers see passenger profiles and ratings prior to accepting a booking.</p>
         </div>
-
         <!-- Training Academy Support -->
         <div class="card">
           <div class="feature-icon-wrapper">
@@ -131,7 +122,6 @@
           <h3 style="margin-bottom: 0.75rem; font-size: 1.25rem;">Situational Training Support</h3>
           <p style="font-size: 0.9rem;">Receive safety training courses, customer handling techniques, self-defense strategies, and standard vehicle maintenance assistance to keep you empowered on the road.</p>
         </div>
-
         <!-- Community and Recognition -->
         <div class="card">
           <div class="feature-icon-wrapper">
@@ -144,7 +134,6 @@
         </div>
       </div>
     </section>
-
     <!-- DRIVER REGISTRATION FORM -->
     <section class="container" style="max-width: 800px; margin-bottom: 6rem;">
       <div class="card" style="padding: 3rem;">
@@ -181,12 +170,10 @@
               </select>
             </div>
           </div>
-
           <div class="form-group" style="margin-bottom: 2rem;">
             <label for="carDetails">Vehicle Details (Year, Make, Model)</label>
             <input type="text" id="carDetails" class="form-input" placeholder="e.g. 2022 Hyundai Ioniq 5" required>
           </div>
-
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1rem;" id="submitApplicationBtn">
             Submit Partner Application
           </button>
@@ -194,7 +181,6 @@
       </div>
     </section>
   </main>
-
   <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
@@ -228,7 +214,6 @@
       <div>Designed for Resume & Portfolio Presentation</div>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
