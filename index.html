@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capella - Women-Centric Ride-Hailing Platform</title>
+  <meta name="description" content="Capella is a women-centric ride-hailing platform featuring live tracking, SOS alerts, and Smart Buddy safety features. Empowering women passengers and drivers.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER NAVIGATION -->
+  <header>
+    <div class="navbar">
+      <a href="index.html" class="logo">
+        <!-- Capella Star Constellation Logo SVG -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L14.85 8.76L22 9.24L16.5 13.97L18.18 21L12 17.27L5.82 21L7.5 13.97L2 9.24L9.15 8.76L12 2Z" />
+        </svg>
+        Capella
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="ride.html">Passenger Hub</a></li>
+        <li><a href="drivers.html">Become a Partner</a></li>
+        <li><a href="business.html">Business Scale</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="ride.html" class="btn btn-primary">Book a Ride</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <main>
+    <section class="hero container">
+      <div class="grid-2">
+        <div class="hero-content">
+          <span class="badge">Reimagining Safety</span>
+          <h1>Empowering Her Journey. By Women, For Women.</h1>
+          <p>Capella is a premium ride-hailing platform built to provide maximum safety, confidence, and financial independence. Experience worry-free travel with live tracking, instant SOS alerts, and smart companion support.</p>
+          <div class="hero-actions">
+            <a href="ride.html" class="btn btn-primary">
+              Explore Passenger Hub
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="drivers.html" class="btn btn-secondary">Earn With Capella</a>
+          </div>
+        </div>
+        
+        <!-- App Demo Mockup Column -->
+        <div class="hero-mockup">
+          <div class="phone-wrapper">
+            <div class="phone-screen">
+              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.75rem;">
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-muted);">Capella App</div>
+                <div class="status-dot"></div>
+              </div>
+              
+              <!-- Mock App Screen Map Area -->
+              <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1rem; margin: 1rem 0;">
+                <div style="width: 100%; height: 180px; background: rgba(138,43,226,0.1); border-radius: 12px; border: var(--border-glass); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 0.8rem; color: var(--color-accent); font-weight: 600; text-shadow: 0 0 10px rgba(76,201,240,0.3);">Map Tracking Active</span>
+                  <!-- Simple mini map illustration line -->
+                  <svg width="100%" height="100%" style="position: absolute; top:0; left:0; pointer-events: none;">
+                    <path d="M 20,90 Q 80,20 130,90 T 260,30" fill="none" stroke="rgba(247, 37, 133, 0.4)" stroke-width="3" stroke-dasharray="5 5"></path>
+                    <circle cx="130" cy="90" r="6" fill="var(--color-secondary)" class="car-pin"></circle>
+                  </svg>
+                </div>
+                
+                <div style="width: 100%; display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
+                  <div style="font-size: 0.8rem; font-weight: 600;">Your Ride Details</div>
+                  <div style="font-size: 0.7rem; color: var(--color-text-muted);">Driver: Sarah J. (Hyundai Ioniq)</div>
+                  <div style="font-size: 0.7rem; color: var(--color-text-muted);">ETA: 4 mins away</div>
+                </div>
+              </div>
+
+              <!-- Action buttons inside mock app -->
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <button class="btn btn-danger" style="width: 100%; padding: 0.6rem; font-size: 0.85rem;" onclick="location.href='ride.html?action=sos'">TRIGGER SOS ALERT</button>
+                <div style="display: flex; gap: 0.5rem;">
+                  <a href="ride.html" class="btn btn-secondary" style="flex: 1; padding: 0.5rem; font-size: 0.75rem;">Track Ride</a>
+                  <a href="ride.html?action=chat" class="btn btn-secondary" style="flex: 1; padding: 0.5rem; font-size: 0.75rem;">Smart Buddy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST AND STATS BANNER -->
+    <section class="trust-banner">
+      <div class="container" style="padding: 0 2rem;">
+        <div class="trust-stats">
+          <div class="stat-item">
+            <h3>100%</h3>
+            <p>Female Drivers & Passengers</p>
+          </div>
+          <div class="stat-item">
+            <h3>50K+</h3>
+            <p>Successful Safe Rides</p>
+          </div>
+          <div class="stat-item">
+            <h3>90%</h3>
+            <p>Driver Fare Revenue Split</p>
+          </div>
+          <div class="stat-item">
+            <h3>4.9★</h3>
+            <p>Rider Satisfaction Rating</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE FEATURE PILLARS -->
+    <section class="container">
+      <div class="section-title">
+        <span class="badge badge-cyan">Safety Innovations</span>
+        <h2>Built with Multi-Layered Safety Infrastructure</h2>
+        <p>Capella redefines transit safety through direct structural design instead of after-the-fact features.</p>
+      </div>
+
+      <div class="grid-3">
+        <!-- Live GPS Tracking -->
+        <div class="card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <h3>Live Tracking</h3>
+          <p>Real-time vehicle position sync shared with trusted emergency contacts and family. Any path deviations trigger automated checks.</p>
+          <a href="ride.html" class="btn btn-outline" style="margin-top: 1.5rem; padding: 0.5rem 1rem; font-size: 0.85rem;">View Dashboard</a>
+        </div>
+
+        <!-- SOS Alerts -->
+        <div class="card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+          </div>
+          <h3>One-Tap SOS Alerts</h3>
+          <p>Active response button that contacts police, dispatch operators, and contacts instantly with live audio feed broadcasts.</p>
+          <a href="ride.html?action=sos" class="btn btn-outline" style="margin-top: 1.5rem; padding: 0.5rem 1rem; font-size: 0.85rem;">Test SOS Signal</a>
+        </div>
+
+        <!-- Smart Buddy Support -->
+        <div class="card feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+            </svg>
+          </div>
+          <h3>Smart Buddy</h3>
+          <p>An on-call dedicated virtual safety companion who monitors the ride, chatting with you until you safely reach your destination.</p>
+          <a href="ride.html?action=chat" class="btn btn-outline" style="margin-top: 1.5rem; padding: 0.5rem 1rem; font-size: 0.85rem;">Launch Buddy Chat</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMPOWERING WOMEN DRIVERS -->
+    <section class="container" style="background: rgba(22, 14, 38, 0.4); border-radius: 30px; border: var(--border-glass); margin-bottom: 6rem; padding: 4rem 3rem;">
+      <div class="grid-2">
+        <div>
+          <span class="badge">Driver Empowerment</span>
+          <h2 style="font-size: 2.25rem; margin-bottom: 1.5rem; font-family: var(--font-header);">Flexible Earning, Fair Compensation, Real Support</h2>
+          <p style="margin-bottom: 2rem;">Capella is built to support the safety and finances of its drivers. By using a 90/10 revenue sharing model, we ensure drivers keep almost all of their fares. We also supply training academies, physical self-defense prep, and recognition schemes to grow a strong network.</p>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <span style="background: rgba(16,185,129,0.1); color: var(--color-success); border-radius: 50%; padding: 0.25rem; display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <div>
+                <strong style="color: var(--color-text-white);">Industry-Leading Revenue Share</strong>
+                <p style="font-size: 0.9rem;">Keep 90% of all fares plus 100% of rider tips.</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <span style="background: rgba(16,185,129,0.1); color: var(--color-success); border-radius: 50%; padding: 0.25rem; display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <div>
+                <strong style="color: var(--color-text-white);">Training & Safety Accreditations</strong>
+                <p style="font-size: 0.9rem;">Complimentary situational safety, navigation, and defensive vehicle training.</p>
+              </div>
+            </div>
+          </div>
+          <a href="drivers.html" class="btn btn-primary" style="margin-top: 2.5rem;">Join Driver Network</a>
+        </div>
+        <div style="text-align: center;">
+          <!-- SVG illustration of Driver Commission/Benefits vs Traditional -->
+          <svg viewBox="0 0 400 300" style="width: 100%; max-width: 380px; filter: drop-shadow(0 0 15px rgba(138,43,226,0.15));">
+            <!-- Background grid lines -->
+            <line x1="50" y1="50" x2="350" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="50" y1="150" x2="350" y2="150" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="50" y1="250" x2="350" y2="250" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+            
+            <!-- Traditional App Bar -->
+            <rect x="90" y="100" width="70" height="150" rx="8" fill="rgba(255,255,255,0.05)" stroke="var(--border-glass)" />
+            <rect x="90" y="100" width="70" height="45" rx="8" fill="var(--color-danger)" opacity="0.8" />
+            <text x="125" y="240" fill="var(--color-text-muted)" font-size="12" text-anchor="middle" font-family="var(--font-header)">Traditional App</text>
+            <text x="125" y="85" fill="var(--color-danger)" font-size="14" font-weight="700" text-anchor="middle" font-family="var(--font-header)">70% Payout</text>
+
+            <!-- Capella App Bar -->
+            <rect x="240" y="70" width="70" height="180" rx="8" fill="rgba(138,43,226,0.1)" stroke="var(--color-primary)" stroke-width="1.5" />
+            <rect x="240" y="70" width="70" height="18" rx="8" fill="var(--color-secondary)" />
+            <text x="275" y="240" fill="var(--color-text-white)" font-size="12" font-weight="700" text-anchor="middle" font-family="var(--font-header)">Capella</text>
+            <text x="275" y="50" fill="var(--color-accent)" font-size="16" font-weight="800" text-anchor="middle" font-family="var(--font-header)">90% Payout</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Capella</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 320px;">A high-fidelity concept website showcasing a women-centric ride-hailing app, custom-designed to demonstrate safety features, driver empowerment, and scalable operations models.</p>
+        <span class="resume-tag">Tech Stack: HTML5 / CSS3 / Vanilla JS</span>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home Landing</a></li>
+          <li><a href="ride.html">Passenger Hub</a></li>
+          <li><a href="drivers.html">Become a Driver</a></li>
+          <li><a href="business.html">Business Scale</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Simulated Features</h4>
+        <ul>
+          <li><a href="ride.html">Live GPS Tracker</a></li>
+          <li><a href="ride.html?action=sos">Test Safety SOS</a></li>
+          <li><a href="ride.html?action=chat">Companion Chat</a></li>
+          <li><a href="drivers.html">Earnings Estimate</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div>&copy; 2026 Capella Platform. All rights reserved.</div>
+      <div>Designed for Resume & Portfolio Presentation</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

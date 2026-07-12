@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passenger Dashboard - Capella</title>
+  <meta name="description" content="Capella passenger safety dashboard. Access live GPS ride tracking, trigger immediate SOS alerts, and chat with your Smart Buddy safety companion.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER NAVIGATION -->
+  <header>
+    <div class="navbar">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L14.85 8.76L22 9.24L16.5 13.97L18.18 21L12 17.27L5.82 21L7.5 13.97L2 9.24L9.15 8.76L12 2Z" />
+        </svg>
+        Capella
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="ride.html" class="active">Passenger Hub</a></li>
+        <li><a href="drivers.html">Become a Partner</a></li>
+        <li><a href="business.html">Business Scale</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn btn-danger" id="nav-sos-btn">SOS EMERGENCY</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SOS EMERGENCY OVERLAY ALARM -->
+  <div class="sos-overlay" id="sosOverlay">
+    <div class="sos-modal">
+      <h2>EMERGENCY SOS ALERT</h2>
+      <p style="color: var(--color-text-white); margin-bottom: 1.5rem;">Automated security response is being triggered. Police dispatch, dispatch center, and your emergency contacts are being alerted in:</p>
+      <div class="sos-timer" id="sosCountdown">5</div>
+      <p style="color: var(--color-danger); font-weight: bold; font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.05em; text-transform: uppercase;">
+        LIVE AUDIO & VIDEO STREAMING FEED IS ACTIVE
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <button class="btn btn-secondary" id="cancelSosBtn" style="border-color: var(--color-danger); color: var(--color-text-white);">Cancel Signal</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="ride-dashboard">
+      
+      <!-- LEFT COLUMN: LIVE TRACKING MAP -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Live Tracking Card -->
+        <div class="map-container" style="flex-grow: 1;">
+          
+          <!-- Map Overlay Top -->
+          <div class="map-overlay-top">
+            <div class="ride-status-badge">
+              <div class="status-dot" id="rideStatusDot"></div>
+              <span id="rideStatusText">Driver Matching...</span>
+            </div>
+            
+            <div class="ride-status-badge" style="pointer-events: auto;">
+              <svg width="18" height="18" fill="none" stroke="var(--color-accent)" stroke-width="2" viewBox="0 0 24 24" style="margin-right: 0.25rem;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span style="color: var(--color-accent); font-size: 0.85rem;">Secure Encrypted Connection</span>
+            </div>
+          </div>
+
+          <!-- SVG Simulated Grid Map -->
+          <svg class="map-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" style="background-color: #0b0717;">
+            <!-- Grid Lines representing city blocks -->
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            
+            <!-- Simulated City Blocks/Parks (Gray/translucent shapes) -->
+            <rect x="60" y="60" width="120" height="100" rx="8" fill="rgba(255,255,255,0.02)" />
+            <rect x="220" y="60" width="180" height="100" rx="8" fill="rgba(255,255,255,0.02)" />
+            <rect x="440" y="60" width="100" height="220" rx="8" fill="rgba(255,255,255,0.02)" />
+            <rect x="580" y="60" width="160" height="100" rx="8" fill="rgba(255,255,255,0.02)" />
+            
+            <rect x="60" y="200" width="180" height="120" rx="8" fill="rgba(255,255,255,0.02)" />
+            <rect x="280" y="200" width="120" height="120" rx="8" fill="rgba(255,255,255,0.02)" />
+            <rect x="580" y="200" width="160" height="120" rx="8" fill="rgba(255,255,255,0.02)" />
+            
+            <rect x="60" y="360" width="340" height="90" rx="8" fill="rgba(255,255,255,0.02)" />
+            <rect x="440" y="360" width="100" height="90" rx="8" fill="rgba(255,255,255,0.02)" />
+            <rect x="580" y="360" width="160" height="90" rx="8" fill="rgba(255,255,255,0.02)" />
+
+            <!-- City Roads/Routes -->
+            <!-- Main Winding Route path that the car pin will follow -->
+            <path id="routePath" d="M 120,400 L 120,280 L 340,280 L 340,140 L 680,140" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M 120,400 L 120,280 L 340,280 L 340,140 L 680,140" fill="none" stroke="rgba(76, 201, 240, 0.25)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+
+            <!-- Pickup Flag SVG -->
+            <g transform="translate(120, 400)">
+              <circle cx="0" cy="0" r="10" fill="var(--color-primary-glow)" />
+              <circle cx="0" cy="0" r="4" fill="var(--color-primary)" />
+              <text x="15" y="4" fill="var(--color-text-muted)" font-size="11" font-weight="700" font-family="var(--font-header)">Start Location</text>
+            </g>
+
+            <!-- Destination Flag SVG -->
+            <g transform="translate(680, 140)">
+              <circle cx="0" cy="0" r="16" fill="rgba(247, 37, 133, 0.2)" class="car-pin" />
+              <circle cx="0" cy="0" r="6" fill="var(--color-secondary)" />
+              <text x="-70" y="-12" fill="var(--color-secondary)" font-size="11" font-weight="800" font-family="var(--font-header)">Destination</text>
+            </g>
+
+            <!-- Pulsing Car Marker dot -->
+            <g id="carMarker" transform="translate(120, 400)" style="visibility: hidden;">
+              <circle cx="0" cy="0" r="12" fill="rgba(247, 37, 133, 0.4)" class="car-pin" />
+              <!-- Small car model layout -->
+              <circle cx="0" cy="0" r="6" fill="var(--color-secondary)" />
+            </g>
+          </svg>
+
+          <!-- Bottom HUD overlay on Map -->
+          <div style="position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem; background: rgba(9, 5, 20, 0.85); backdrop-filter: blur(8px); border: var(--border-glass); border-radius: 12px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <div id="driverDetails" style="display: flex; align-items: center; gap: 1rem; opacity: 0.5;">
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">
+                SJ
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 0.9rem;" id="driverName">Sarah Jenkins</div>
+                <div style="font-size: 0.75rem; color: var(--color-text-muted);" id="carPlate">Silver Tesla Model 3 &bull; SafeRide-4U</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.75rem; color: var(--color-text-muted);">ETA ESTIMATE</div>
+              <div style="font-size: 1.25rem; font-weight: 800; color: var(--color-accent); font-family: var(--font-header);" id="etaText">-- mins</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Safety Details Panel -->
+        <div class="card grid-2" style="padding: 1.5rem;">
+          <div style="display: flex; gap: 1rem; align-items: center;">
+            <span style="background: rgba(76, 201, 240, 0.1); border-radius: 50%; padding: 0.5rem; color: var(--color-accent); display: flex;">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </span>
+            <div>
+              <h4 style="font-size: 0.95rem; margin-bottom: 0.25rem;">Automatic Route Guard</h4>
+              <p style="font-size: 0.8rem; line-height: 1.4;">If the vehicle drifts >100m off-route, an automatic dispatch warning check triggers.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: center;">
+            <span style="background: rgba(247, 37, 133, 0.1); border-radius: 50%; padding: 0.5rem; color: var(--color-secondary); display: flex;">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </span>
+            <div>
+              <h4 style="font-size: 0.95rem; margin-bottom: 0.25rem;">Live Broadcast Link</h4>
+              <p style="font-size: 0.8rem; line-height: 1.4;">A safety tracker URL is texted to your emergency contacts, showing location & status.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: CONTROLS & SMART BUDDY CHAT -->
+      <div class="control-panel">
+        
+        <!-- Book a Ride Form (Visible initially) -->
+        <div class="card booking-widget" id="bookingPanel">
+          <h3>Request Secure Ride</h3>
+          <form id="rideBookingForm" onsubmit="event.preventDefault();">
+            <div class="form-group">
+              <label for="pickup">Pickup Address</label>
+              <input type="text" id="pickup" class="form-input" value="120 Creative Boulevard, Metro City" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="destination">Destination</label>
+              <select id="destination" class="form-select">
+                <option value="680">Downtown tech Hub, Suite 3B (Estimated: 8.5 km)</option>
+                <option value="340">Eastside Botanical Garden (Estimated: 4.2 km)</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="rideType">Safety Package Level</label>
+              <select id="rideType" class="form-select">
+                <option value="standard">Capella Guard Standard (Verified Female Driver)</option>
+                <option value="pool">Capella Pool Share (Empowered Female Ride Pooling)</option>
+                <option value="premium">Capella Guardian Plus (Live Video Checkin + Premium Cab)</option>
+              </select>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.03); border: var(--border-glass); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
+                <span>Subtotal Fare:</span>
+                <span id="subtotalFare">$14.50</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--color-accent); font-weight: bold;">
+                <span>Safety Levy Cover:</span>
+                <span>Included ($0.00)</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="confirmBookingBtn" style="width: 100%;">
+              Search Verified Driver
+            </button>
+          </form>
+        </div>
+
+        <!-- Active Ride Overview (Visible when ride starts) -->
+        <div class="card" id="activeRidePanel" style="display: none;">
+          <h3 style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <span>Current Ride Security</span>
+            <span class="badge" style="margin-bottom: 0; font-size: 0.7rem;">Active</span>
+          </h3>
+          <p style="font-size: 0.85rem; margin-bottom: 1.5rem;">Your ride is being monitored by our Central dispatch node. Tap below if you feel unsafe.</p>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <button class="btn btn-danger" id="triggerSosBtn" style="width: 100%;">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="margin-right: 0.25rem;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              ACTIVATE SOS ALARM
+            </button>
+            <button class="btn btn-secondary" id="terminateRideBtn" style="width: 100%;">Cancel / End Ride</button>
+          </div>
+        </div>
+
+        <!-- Smart Buddy Companion Chat -->
+        <div class="card buddy-card" style="flex-grow: 1;">
+          <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="24" height="24" fill="none" stroke="var(--color-secondary)" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Smart Buddy Chat
+          </h3>
+          <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+            Your assigned companion, <strong style="color: var(--color-secondary);">Evelyn</strong>, is online to converse.
+          </p>
+          
+          <div class="chat-box" id="chatBox">
+            <div class="chat-msg msg-received">
+              Hello Anya! I am your safety buddy today. I will monitor your GPS coordinates. Feel free to talk to me! Tell me about your day, or just say 'hi' to let me know you're doing great.
+            </div>
+          </div>
+          
+          <form id="chatForm" onsubmit="event.preventDefault();" class="chat-input-wrapper">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Type message to companion..." autocomplete="off">
+            <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem; border-radius: 10px;">
+              Send
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Capella</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 320px;">A high-fidelity concept website showcasing a women-centric ride-hailing app, custom-designed to demonstrate safety features, driver empowerment, and scalable operations models.</p>
+        <span class="resume-tag">Tech Stack: HTML5 / CSS3 / Vanilla JS</span>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home Landing</a></li>
+          <li><a href="ride.html">Passenger Hub</a></li>
+          <li><a href="drivers.html">Become a Driver</a></li>
+          <li><a href="business.html">Business Scale</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Simulated Features</h4>
+        <ul>
+          <li><a href="ride.html">Live GPS Tracker</a></li>
+          <li><a href="ride.html?action=sos">Test Safety SOS</a></li>
+          <li><a href="ride.html?action=chat">Companion Chat</a></li>
+          <li><a href="drivers.html">Earnings Estimate</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div>&copy; 2026 Capella Platform. All rights reserved.</div>
+      <div>Designed for Resume & Portfolio Presentation</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
